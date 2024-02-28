@@ -30,27 +30,25 @@ class Section:
                 count_tasks += 1
                 self.tasks.remove(task)
 
-        return f"Cleared {count_tasks} tasks"
+        return f"Cleared {count_tasks} tasks."
 
     def view_section(self):
         tasks_with_details = '\n'.join(t.details() for t in self.tasks)
         return f'Section {self.name}:\n{tasks_with_details}'
-
-task = Task("Make bed", "27/05/2020")
-task1 = Task("Make bed", "27/05/2020")
+#
+task = Task("Make bed", "27/05/2010")
 task2 = Task("Make bed", "27/05/2020")
 print(task.change_name("Go to University"))
-print(task.change_due_date("28.05.2020"))
+print(task.change_due_date("28.05.2010"))
 task.add_comment("Don't forget laptop")
 print(task.edit_comment(0, "Don't forget laptop and notebook"))
 print(task.details())
 section = Section("Daily tasks")
 print(section.add_task(task))
-print(section.add_task(task1))
 print(section.add_task(task2))
 task.completed = True
 task2.completed = True
-second_task = Task("Make bed", "27/05/2020")
+second_task = Task("Make bed", "27/05/2025")
 section.add_task(second_task)
 print(section.clean_section())
 print(section.view_section())

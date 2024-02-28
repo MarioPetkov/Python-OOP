@@ -1,4 +1,4 @@
-from project.player from Player
+from project.player import Player
 
 
 class Guild:
@@ -24,15 +24,25 @@ class Guild:
         # self.players.remove(player_name)
         # player_name.guild = "Unaffiliated"
         # return f"Player {player_name} has been removed from the guild."
-        for player in self.players:
-            if player.name == player_name:
-                player.guild = "Unaffiliated"
-                self.players.remove(player)
-                return f"Player {player_name} has been removed from the guild."
-        return f"Player {player_name} is not in the guild."
+
+        # for player in self.players:
+        #     if player.name == player_name:
+        #         player.guild = "Unaffiliated"
+        #         self.players.remove(player)
+        #         return f"Player {player_name} has been removed from the guild."
+        # return f"Player {player_name} is not in the guild."
+
+        try:
+            player = next(filter(lambda p: p.name == player_name, self.players))
+        except StopIteration:
+            return f"Player {player_name} is not in the guild."
+
+        player.guild = 'Unaffiliated'
+        self.players.remove(player)
+        return f"Player {player_name} has been removed from the guild."
 
     def guild_info(self):
-        players_data = [current_player.player_info() for current_player in self.players]
+        players_data = '\n'.join([p.player_info() for p in self.players])
 
         return f'Guild: {self.name}\n{"".join(players_data)}'
 
